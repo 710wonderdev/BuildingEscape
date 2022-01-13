@@ -1,6 +1,7 @@
 // Elisabeth Pring Copyright
 
-
+#include "Engine/World.h"
+#include "GameFramework/PlayerController.h"
 #include "OpenDoor.h"
 #include "GameFramework/Actor.h"
 
@@ -26,8 +27,10 @@ void UOpenDoor::BeginPlay()
 	if(!PressurePlates)
 	{
 		UE_LOG(LogTemp, Error, TEXT("%s has the open door component on it, but no pressuesplates set!"), *GetOwner()->GetName());
-		//ActorName has the open door component on it, but no pressuesplates set! Can cause a crash
-	} 
+		//ActorName has the open door component on it, but no pressuesplates set! Can cause crash
+	}
+
+	ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn(); 
 	
 }
 
