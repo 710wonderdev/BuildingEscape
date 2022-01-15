@@ -1,4 +1,4 @@
-// Elisabeth Pring Copyright
+// Copyright Elisabeth Pring 2022
 
 #pragma once
 
@@ -6,7 +6,6 @@
 #include "Components/ActorComponent.h"
 #include "Engine/TriggerVolume.h"
 #include "OpenDoor.generated.h"
-
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BUILDINGESCAPE_API UOpenDoor : public UActorComponent
@@ -33,16 +32,24 @@ public:
 	float CurrentYaw;
 
 	UPROPERTY(EditAnywhere)
-	float TargetYaw = 90.f;
+	float OpenAngle = 90.f;
 
+	float DoorLastOpened = 0.f;
+	
+	UPROPERTY(EditAnywhere)
+	float DoorClosedDelay = 0.7f;
+
+	UPROPERTY(EditAnywhere)
+	float DoorOpenSpeed = .8f;
+
+	UPROPERTY(EditAnywhere)
+	float DoorCloseSpeed = 2.f;
+	
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlates;
 
 	UPROPERTY(EditAnywhere)
 	AActor* ActorThatOpens;
 
-	float DoorLastOpened = 0.f;
-	float DoorClosedDelay = .7f;
-
-		 
+ 
 };

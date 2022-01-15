@@ -1,4 +1,4 @@
-// Elisabeth Pring Copyright
+// Copyright Elisabeth Pring 2022
 
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
@@ -12,9 +12,7 @@ UOpenDoor::UOpenDoor()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
 }
-
 
 // Called when the game starts
 void UOpenDoor::BeginPlay()
@@ -22,7 +20,7 @@ void UOpenDoor::BeginPlay()
 	Super::BeginPlay();
 	InitialYaw = GetOwner()->GetActorRotation().Yaw;
 	CurrentYaw = InitialYaw;
-	TargetYaw += InitialYaw;
+	OpenAngle += InitialYaw;
 
 	if(!PressurePlates)
 	{
@@ -31,7 +29,7 @@ void UOpenDoor::BeginPlay()
 	}
 
 	ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn(); 
-	
+
 }
 
 // Called every frame
@@ -52,14 +50,13 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 			ClosedDoor(DeltaTime);
 		}
 		
-
 	}
 
 }
 
 void UOpenDoor::OpenDoor(float DeltaTime)
 {
-	CurrentYaw = FMath::FInterpTo(CurrentYaw, TargetYaw, DeltaTime, 2.f);
+	CurrentYaw = FMath::FInterpTo(CurrentYaw, OpenAngle, DeltaTime, DoorOpenSpeed);
 	FRotator DoorRotation = GetOwner()->GetActorRotation();
 	DoorRotation.Yaw = CurrentYaw;
 	GetOwner()->SetActorRotation(DoorRotation); 
@@ -68,7 +65,7 @@ void UOpenDoor::OpenDoor(float DeltaTime)
 
 void UOpenDoor::ClosedDoor(float DeltaTime)
 {
-	CurrentYaw = FMath::FInterpTo(CurrentYaw, InitialYaw, DeltaTime, 4.f);
+	CurrentYaw = FMath::FInterpTo(CurrentYaw, InitialYaw, DeltaTime, DoorCloseSpeed);
 	FRotator DoorRotation = GetOwner()->GetActorRotation();
 	DoorRotation.Yaw = CurrentYaw;
 	GetOwner()->SetActorRotation(DoorRotation); 

@@ -1,4 +1,4 @@
-// Elisabeth Pring Copyright
+// Copyright Elisabeth Pring 2022
 
 #pragma once
 
