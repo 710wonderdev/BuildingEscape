@@ -44,12 +44,11 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	float DoorCloseSpeed = 2.f;
-	
+
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlates;
 
 	UPROPERTY(EditAnywhere)
 	AActor* ActorThatOpens;
-
  
 };
